@@ -28,40 +28,40 @@ const SECURITY_ITEMS = [
 
 export function Security() {
     const sectionRef = useRef<HTMLElement>(null);
-    const timelineRef = useRef<HTMLDivElement>(null);
+    const itemsRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const ctx = gsap.context(() => {
-            const items = timelineRef.current?.querySelectorAll(".timeline-item");
-            const lines = timelineRef.current?.querySelectorAll(".timeline-line");
+            const items = itemsRef.current?.querySelectorAll(".security-item");
+            const lines = itemsRef.current?.querySelectorAll(".timeline-line");
 
-            if (items && lines) {
-                // Animate items on scroll
+            if (items) {
                 items.forEach((item, i) => {
                     gsap.from(item, {
                         scrollTrigger: {
                             trigger: item,
-                            start: "top 80%",
+                            start: "top 85%",
                             toggleActions: "play none none reverse",
                         },
                         opacity: 0,
-                        y: 30,
-                        duration: 0.6,
-                        delay: i * 0.1,
+                        y: 40,
+                        duration: 0.7,
+                        delay: i * 0.15,
                         ease: "power3.out",
                     });
                 });
+            }
 
-                // Animate connecting lines
+            if (lines) {
                 lines.forEach((line) => {
                     gsap.from(line, {
                         scrollTrigger: {
                             trigger: line,
-                            start: "top 80%",
+                            start: "top 85%",
                             toggleActions: "play none none reverse",
                         },
                         scaleY: 0,
-                        duration: 0.8,
+                        duration: 0.6,
                         ease: "power3.out",
                     });
                 });
@@ -74,12 +74,12 @@ export function Security() {
     return (
         <section
             ref={sectionRef}
-            className="relative py-32"
+            className="relative py-24 md:py-32"
             style={{ background: "#0B0B0B" }}
         >
-            <div className="max-w-3xl mx-auto px-6">
+            <div className="max-w-4xl mx-auto px-6">
                 {/* Section header */}
-                <div className="text-center mb-20">
+                <div className="text-center mb-16 md:mb-24">
                     <div
                         className="mb-4"
                         style={{
@@ -95,7 +95,7 @@ export function Security() {
                     <h2
                         style={{
                             fontFamily: '"Pragmatica Cond", Arial, sans-serif',
-                            fontSize: "clamp(32px, 5vw, 48px)",
+                            fontSize: "clamp(28px, 5vw, 48px)",
                             fontWeight: 400,
                             letterSpacing: "-0.02em",
                             textTransform: "uppercase",
@@ -109,77 +109,146 @@ export function Security() {
                     </h2>
                 </div>
 
-                {/* Vertical timeline */}
-                <div ref={timelineRef} className="relative">
+                {/* Timeline - stacked on mobile, alternating on desktop */}
+                <div ref={itemsRef} className="relative">
+                    {/* Central vertical line - hidden on mobile */}
+                    <div
+                        className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2"
+                        style={{ background: "rgba(255, 255, 255, 0.15)" }}
+                    />
+
                     {SECURITY_ITEMS.map((item, index) => (
-                        <div key={item.id} className="relative">
-                            {/* Timeline item */}
+                        <div
+                            key={item.id}
+                            className="security-item relative mb-12 md:mb-16 last:mb-0"
+                        >
+                            {/* Mobile: stacked layout */}
+                            <div className="md:hidden flex flex-col items-center text-center">
+                                {/* Node */}
+                                <div
+                                    className="flex items-center gap-2 mb-4"
+                                    style={{
+                                        fontFamily: '"Roboto Mono", monospace',
+                                        fontSize: "13px",
+                                        letterSpacing: "0.05em",
+                                        color: "#FFFFFF",
+                                    }}
+                                >
+                                    <span style={{ color: "#CC6437" }}>{item.id}</span>
+                                    <span style={{ color: "rgba(255,255,255,0.3)" }}>—</span>
+                                    <span>{item.title}</span>
+                                </div>
+                                <p
+                                    style={{
+                                        fontFamily: '"Pragmatica Cond", Arial, sans-serif',
+                                        fontSize: "14px",
+                                        lineHeight: 1.6,
+                                        color: "rgba(255, 255, 255, 0.6)",
+                                        maxWidth: "280px",
+                                    }}
+                                >
+                                    {item.description}
+                                </p>
+                                {/* Connecting line */}
+                                {index < SECURITY_ITEMS.length - 1 && (
+                                    <div
+                                        className="timeline-line w-px h-8 mt-6 origin-top"
+                                        style={{ background: "rgba(255, 255, 255, 0.15)" }}
+                                    />
+                                )}
+                            </div>
+
+                            {/* Desktop: alternating layout */}
                             <div
-                                className="timeline-item flex items-start gap-8 pb-16"
+                                className="hidden md:grid"
                                 style={{
-                                    flexDirection: index % 2 === 0 ? "row" : "row-reverse",
+                                    gridTemplateColumns: "1fr auto 1fr",
+                                    gap: "32px",
+                                    alignItems: "start",
                                 }}
                             >
-                                {/* Content side */}
+                                {/* Left content - shown on even items */}
                                 <div
-                                    className="flex-1"
-                                    style={{ textAlign: index % 2 === 0 ? "right" : "left" }}
+                                    className={`${index % 2 === 0 ? "text-right" : "invisible"}`}
                                 >
-                                    <h3
-                                        className="mb-2"
-                                        style={{
-                                            fontFamily: '"Pragmatica Cond", Arial, sans-serif',
-                                            fontSize: "20px",
-                                            fontWeight: 400,
-                                            letterSpacing: "-0.02em",
-                                            textTransform: "uppercase",
-                                            color: "#FFFFFF",
-                                        }}
-                                    >
-                                        {item.title}
-                                    </h3>
-                                    <p
-                                        style={{
-                                            fontFamily: '"Pragmatica Cond", Arial, sans-serif',
-                                            fontSize: "14px",
-                                            lineHeight: 1.5,
-                                            color: "rgba(255, 255, 255, 0.6)",
-                                            maxWidth: "300px",
-                                            marginLeft: index % 2 === 0 ? "auto" : 0,
-                                        }}
-                                    >
-                                        {item.description}
-                                    </p>
+                                    {index % 2 === 0 && (
+                                        <>
+                                            <div
+                                                className="mb-2"
+                                                style={{
+                                                    fontFamily: '"Roboto Mono", monospace',
+                                                    fontSize: "13px",
+                                                    letterSpacing: "0.05em",
+                                                    color: "#FFFFFF",
+                                                }}
+                                            >
+                                                <span style={{ color: "#CC6437" }}>{item.id}</span>
+                                                <span style={{ color: "rgba(255,255,255,0.3)" }}> — </span>
+                                                <span>{item.title}</span>
+                                            </div>
+                                            <p
+                                                style={{
+                                                    fontFamily: '"Pragmatica Cond", Arial, sans-serif',
+                                                    fontSize: "14px",
+                                                    lineHeight: 1.6,
+                                                    color: "rgba(255, 255, 255, 0.6)",
+                                                    marginLeft: "auto",
+                                                    maxWidth: "280px",
+                                                }}
+                                            >
+                                                {item.description}
+                                            </p>
+                                        </>
+                                    )}
                                 </div>
 
                                 {/* Center node */}
                                 <div className="relative flex flex-col items-center">
-                                    {/* Node pill */}
                                     <div
-                                        className="relative z-10"
-                                        style={{
-                                            padding: "8px 16px",
-                                            background: "#CC6437",
-                                            borderRadius: "999px",
-                                            fontFamily: '"Roboto Mono", monospace',
-                                            fontSize: "14px",
-                                            color: "#FFFFFF",
-                                        }}
-                                    >
-                                        {item.id} — SC
-                                    </div>
-
-                                    {/* Connecting line */}
+                                        className="w-3 h-3 rounded-full"
+                                        style={{ background: "#CC6437" }}
+                                    />
                                     {index < SECURITY_ITEMS.length - 1 && (
                                         <div
-                                            className="timeline-line absolute top-full w-px h-20 origin-top"
-                                            style={{ background: "rgba(255, 255, 255, 0.2)" }}
+                                            className="timeline-line w-px h-24 origin-top"
+                                            style={{ background: "rgba(255, 255, 255, 0.15)" }}
                                         />
                                     )}
                                 </div>
 
-                                {/* Empty side */}
-                                <div className="flex-1" />
+                                {/* Right content - shown on odd items */}
+                                <div
+                                    className={`${index % 2 === 1 ? "text-left" : "invisible"}`}
+                                >
+                                    {index % 2 === 1 && (
+                                        <>
+                                            <div
+                                                className="mb-2"
+                                                style={{
+                                                    fontFamily: '"Roboto Mono", monospace',
+                                                    fontSize: "13px",
+                                                    letterSpacing: "0.05em",
+                                                    color: "#FFFFFF",
+                                                }}
+                                            >
+                                                <span style={{ color: "#CC6437" }}>{item.id}</span>
+                                                <span style={{ color: "rgba(255,255,255,0.3)" }}> — </span>
+                                                <span>{item.title}</span>
+                                            </div>
+                                            <p
+                                                style={{
+                                                    fontFamily: '"Pragmatica Cond", Arial, sans-serif',
+                                                    fontSize: "14px",
+                                                    lineHeight: 1.6,
+                                                    color: "rgba(255, 255, 255, 0.6)",
+                                                    maxWidth: "280px",
+                                                }}
+                                            >
+                                                {item.description}
+                                            </p>
+                                        </>
+                                    )}
+                                </div>
                             </div>
                         </div>
                     ))}
