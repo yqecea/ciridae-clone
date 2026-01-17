@@ -77,27 +77,13 @@ export function Security() {
             <div className="w-full max-w-7xl mx-auto px-6" style={{ margin: '0 auto' }}>
                 {/* Section header */}
                 <div className="text-center mb-16 md:mb-24 flex flex-col items-center">
-                    <div
-                        className="mb-4"
-                        style={{
-                            fontFamily: '"Roboto Mono", monospace',
-                            fontSize: "11px",
-                            letterSpacing: "0.1em",
-                            textTransform: "uppercase",
-                            color: "#888888",
-                        }}
-                    >
+                    <div className="mb-4 section-label text-[#888888]">
                         Security
                     </div>
                     <h2
+                        className="text-heading-xl text-white leading-[1.1] text-uppercase tracking-[-0.02em]"
                         style={{
-                            fontFamily: '"Pragmatica Cond", Arial, sans-serif',
                             fontSize: "clamp(28px, 5vw, 48px)",
-                            fontWeight: 400,
-                            letterSpacing: "-0.02em",
-                            textTransform: "uppercase",
-                            color: "#FFFFFF",
-                            lineHeight: 1.1,
                         }}
                     >
                         Enterprise Grade
@@ -122,28 +108,12 @@ export function Security() {
                             {/* Mobile: stacked layout */}
                             <div className="md:hidden flex flex-col items-center text-center">
                                 {/* Node */}
-                                <div
-                                    className="flex items-center gap-2 mb-4"
-                                    style={{
-                                        fontFamily: '"Roboto Mono", monospace',
-                                        fontSize: "13px",
-                                        letterSpacing: "0.05em",
-                                        color: "#FFFFFF",
-                                    }}
-                                >
+                                <div className="flex items-center gap-2 mb-4 text-mono text-[13px] tracking-[0.05em] text-white">
                                     <span style={{ color: "#CC6437" }}>{item.id}</span>
                                     <span style={{ color: "rgba(255,255,255,0.3)" }}>—</span>
                                     <span>{item.title}</span>
                                 </div>
-                                <p
-                                    style={{
-                                        fontFamily: '"Pragmatica Cond", Arial, sans-serif',
-                                        fontSize: "14px",
-                                        lineHeight: 1.6,
-                                        color: "rgba(255, 255, 255, 0.6)",
-                                        maxWidth: "280px",
-                                    }}
-                                >
+                                <p className="text-mono text-sm leading-relaxed text-white/60 max-w-[280px]">
                                     {item.description}
                                 </p>
                                 {/* Connecting line */}
@@ -170,28 +140,12 @@ export function Security() {
                                 >
                                     {index % 2 === 0 && (
                                         <>
-                                            <div
-                                                className="mb-2"
-                                                style={{
-                                                    fontFamily: '"Roboto Mono", monospace',
-                                                    fontSize: "13px",
-                                                    letterSpacing: "0.05em",
-                                                    color: "#FFFFFF",
-                                                }}
-                                            >
+                                            <div className="mb-2 text-mono text-[13px] tracking-[0.05em] text-white">
                                                 <span style={{ color: "#CC6437" }}>{item.id}</span>
                                                 <span style={{ color: "rgba(255,255,255,0.3)" }}> — </span>
                                                 <span>{item.title}</span>
                                             </div>
-                                            <p
-                                                style={{
-                                                    fontFamily: '"Pragmatica Cond", Arial, sans-serif',
-                                                    fontSize: "14px",
-                                                    lineHeight: 1.6,
-                                                    color: "rgba(255, 255, 255, 0.6)",
-                                                    maxWidth: "280px",
-                                                }}
-                                            >
+                                            <p className="text-mono text-sm leading-relaxed text-white/60 max-w-[280px]">
                                                 {item.description}
                                             </p>
                                         </>
@@ -218,28 +172,12 @@ export function Security() {
                                 >
                                     {index % 2 === 1 && (
                                         <>
-                                            <div
-                                                className="mb-2"
-                                                style={{
-                                                    fontFamily: '"Roboto Mono", monospace',
-                                                    fontSize: "13px",
-                                                    letterSpacing: "0.05em",
-                                                    color: "#FFFFFF",
-                                                }}
-                                            >
+                                            <div className="mb-2 text-mono text-[13px] tracking-[0.05em] text-white">
                                                 <span style={{ color: "#CC6437" }}>{item.id}</span>
                                                 <span style={{ color: "rgba(255,255,255,0.3)" }}> — </span>
                                                 <span>{item.title}</span>
                                             </div>
-                                            <p
-                                                style={{
-                                                    fontFamily: '"Pragmatica Cond", Arial, sans-serif',
-                                                    fontSize: "14px",
-                                                    lineHeight: 1.6,
-                                                    color: "rgba(255, 255, 255, 0.6)",
-                                                    maxWidth: "280px",
-                                                }}
-                                            >
+                                            <p className="text-mono text-sm leading-relaxed text-white/60 max-w-[280px]">
                                                 {item.description}
                                             </p>
                                         </>

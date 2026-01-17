@@ -1,7 +1,5 @@
 "use client";
 
-import { Logo } from "../ui/Logo";
-
 const NAV_LINKS = [
     { label: "Home", href: "/" },
     { label: "About", href: "#about" },
@@ -21,47 +19,36 @@ export function Footer() {
             <div
                 className="absolute inset-0 opacity-60 pointer-events-none"
                 style={{
-                    background: "radial-gradient(ellipse at center, rgba(30, 80, 120, 0.3) 0%, transparent 70%)",
+                    background: "radial-gradient(ellipse at center, rgba(30, 80, 120, 0.2) 0%, transparent 70%)",
                     filter: "blur(60px)",
                 }}
             />
 
-            {/* Blue border frame - positioned relative to viewport/full width */}
+            {/* Blue border frame */}
             <div
                 className="absolute inset-4 md:inset-8 pointer-events-none z-0"
                 style={{
-                    border: "1px solid rgba(59, 130, 246, 0.3)",
+                    border: "1px solid rgba(59, 130, 246, 0.25)",
                     borderRadius: "4px",
                 }}
             />
 
             <div className="relative z-10 w-full px-8 md:px-12 h-full flex flex-col justify-between min-h-[400px]">
 
-                {/* Floating Side Labels - Positioned relative to the wider container */}
+                {/* Left side label - San Francisco */}
                 <div className="absolute top-1/2 -translate-y-1/2 left-8 md:left-16 hidden md:block">
-                    <span style={{
-                        fontFamily: '"Roboto Mono", monospace',
-                        fontSize: "10px",
-                        letterSpacing: "0.1em",
-                        textTransform: "uppercase",
-                        color: "rgba(255, 255, 255, 0.4)",
-                        writingMode: "vertical-rl",
-                        transform: "rotate(180deg)"
-                    }}>
+                    <span className="text-mono text-[10px] tracking-[0.1em] uppercase text-white/35 vertical-rl rotate-180">
                         San Francisco
                     </span>
                 </div>
 
-                <div className="absolute top-1/2 -translate-y-1/2 right-8 md:right-16 hidden md:block">
-                    <span style={{
-                        fontFamily: '"Roboto Mono", monospace',
-                        fontSize: "10px",
-                        letterSpacing: "0.1em",
-                        textTransform: "uppercase",
-                        color: "rgba(255, 255, 255, 0.4)",
-                        writingMode: "vertical-rl"
-                    }}>
+                {/* Right side label - Fortitudine Vincimus */}
+                <div className="absolute top-1/2 -translate-y-1/2 right-8 md:right-16 hidden md:flex flex-col items-center gap-8">
+                    <span className="text-mono text-[10px] tracking-[0.1em] uppercase text-white/35 vertical-rl">
                         Est. 2025
+                    </span>
+                    <span className="text-mono text-[9px] tracking-[0.08em] uppercase text-white/25 vertical-rl">
+                        Fortitudine Vincimus
                     </span>
                 </div>
 
@@ -69,12 +56,13 @@ export function Footer() {
                 <div className="max-w-4xl mx-auto w-full flex flex-col items-center justify-center flex-1">
                     {/* Star icon and Logo */}
                     <div className="flex flex-col items-center mb-12">
-                        {/* Four-star icon arrangement */}
+                        {/* Constellation star icon */}
                         <div className="relative w-16 h-16 mb-4">
                             <svg
                                 viewBox="0 0 64 64"
                                 fill="none"
                                 className="w-full h-full"
+                                style={{ filter: "drop-shadow(0 0 8px rgba(255, 255, 255, 0.3))" }}
                             >
                                 {/* Center star */}
                                 <path
@@ -89,14 +77,7 @@ export function Footer() {
                             </svg>
                         </div>
                         <div
-                            style={{
-                                fontFamily: '"Pragmatica Cond", Arial, sans-serif',
-                                fontSize: "clamp(28px, 5vw, 40px)",
-                                fontWeight: 400,
-                                letterSpacing: "0.1em",
-                                textTransform: "uppercase",
-                                color: "#FFFFFF",
-                            }}
+                            className="text-[clamp(28px,5vw,40px)] font-normal tracking-[0.15em] text-uppercase text-white"
                         >
                             CIRIDAE
                         </div>
@@ -109,11 +90,11 @@ export function Footer() {
                             className="inline-block"
                             style={{
                                 padding: "16px 40px",
-                                border: "1px solid rgba(255, 255, 255, 0.4)",
+                                border: "1px solid rgba(255, 255, 255, 0.35)",
                                 borderRadius: "999px",
                                 fontFamily: '"Roboto Mono", monospace',
-                                fontSize: "12px",
-                                letterSpacing: "0.05em",
+                                fontSize: "11px",
+                                letterSpacing: "0.08em",
                                 textTransform: "uppercase",
                                 color: "#FFFFFF",
                                 transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
@@ -130,12 +111,10 @@ export function Footer() {
                                 key={link.label}
                                 href={link.href}
                                 style={{
-                                    fontFamily: '"Pragmatica Cond", Arial, sans-serif',
-                                    fontSize: "14px",
-                                    color: "rgba(255, 255, 255, 0.6)",
+                                    color: "rgba(255, 255, 255, 0.5)",
                                     transition: "color 0.2s",
                                 }}
-                                className="hover:text-white"
+                                className="hover:text-white text-mono text-sm"
                             >
                                 {link.label}
                             </a>
@@ -148,46 +127,35 @@ export function Footer() {
                             <a
                                 href="#privacy"
                                 style={{
-                                    fontFamily: '"Roboto Mono", monospace',
-                                    fontSize: "10px",
-                                    letterSpacing: "0.05em",
-                                    textTransform: "uppercase",
-                                    color: "rgba(255, 255, 255, 0.4)",
+                                    color: "rgba(255, 255, 255, 0.35)",
                                     transition: "color 0.2s",
                                 }}
-                                className="hover:text-white/60"
+                                className="hover:text-white/60 text-mono text-[10px] tracking-[0.05em] uppercase"
                             >
                                 Privacy Policy
                             </a>
                             <a
                                 href="#terms"
                                 style={{
-                                    fontFamily: '"Roboto Mono", monospace',
-                                    fontSize: "10px",
-                                    letterSpacing: "0.05em",
-                                    textTransform: "uppercase",
-                                    color: "rgba(255, 255, 255, 0.4)",
+                                    color: "rgba(255, 255, 255, 0.35)",
                                     transition: "color 0.2s",
                                 }}
-                                className="hover:text-white/60"
+                                className="hover:text-white/60 text-mono text-[10px] tracking-[0.05em] uppercase"
                             >
                                 Terms and Conditions
                             </a>
                         </div>
                         <p
                             style={{
-                                fontFamily: '"Roboto Mono", monospace',
-                                fontSize: "10px",
-                                letterSpacing: "0.05em",
-                                textTransform: "uppercase",
-                                color: "rgba(255, 255, 255, 0.3)",
+                                color: "rgba(255, 255, 255, 0.25)",
                             }}
+                            className="text-mono text-[10px] tracking-[0.05em] uppercase"
                         >
-                            All Rights Reserved 2024
+                            All Rights Reserved 2025
                         </p>
                     </div>
                 </div>
             </div>
-        </footer>
+        </footer >
     );
 }

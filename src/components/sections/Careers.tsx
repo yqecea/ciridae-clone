@@ -59,34 +59,16 @@ export function Careers() {
         >
             <div className="w-full max-w-7xl mx-auto px-6" style={{ margin: '0 auto' }}>
                 {/* Section label */}
-                <div
-                    className="text-center mb-6"
-                    style={{
-                        fontFamily: '"Roboto Mono", monospace',
-                        fontSize: "11px",
-                        letterSpacing: "0.1em",
-                        textTransform: "uppercase",
-                        color: "#888888",
-                    }}
-                >
+                <div className="section-label mb-6 text-center text-[#888888]">
                     Careers
                 </div>
 
                 {/* Large gradient text */}
                 <h2
                     ref={textRef}
-                    className="text-center mb-16 md:mb-24"
+                    className="text-center mb-16 md:mb-24 text-heading-xl leading-[1.05] bg-gradient-to-b from-white to-white/50 bg-clip-text text-transparent"
                     style={{
-                        fontFamily: '"Pragmatica Cond", Arial, sans-serif',
                         fontSize: "clamp(32px, 7vw, 80px)",
-                        fontWeight: 400,
-                        letterSpacing: "-0.03em",
-                        textTransform: "uppercase",
-                        lineHeight: 1.05,
-                        background: "linear-gradient(180deg, #FFFFFF 0%, rgba(206, 206, 206, 0.5) 100%)",
-                        WebkitBackgroundClip: "text",
-                        WebkitTextFillColor: "transparent",
-                        backgroundClip: "text",
                     }}
                 >
                     Join a Team Shaping
@@ -104,13 +86,8 @@ export function Careers() {
                     {DECORATIVE_LABELS.map((label, index) => (
                         <div
                             key={label}
-                            className="decorative-label"
+                            className="decorative-label text-mono text-[10px] tracking-[0.15em] uppercase text-white/40"
                             style={{
-                                fontFamily: '"Roboto Mono", monospace',
-                                fontSize: "10px",
-                                letterSpacing: "0.15em",
-                                textTransform: "uppercase",
-                                color: "rgba(255, 255, 255, 0.4)",
                                 writingMode: index === 1 ? "vertical-rl" : "horizontal-tb",
                                 transform: index === 1 ? "rotate(180deg)" : "none",
                             }}
@@ -124,18 +101,7 @@ export function Careers() {
                 <div className="flex justify-center">
                     <a
                         href="#careers"
-                        className="group inline-flex items-center gap-3"
-                        style={{
-                            padding: "16px 32px",
-                            border: "1px solid rgba(255, 255, 255, 0.3)",
-                            borderRadius: "999px",
-                            fontFamily: '"Roboto Mono", monospace',
-                            fontSize: "12px",
-                            letterSpacing: "0.05em",
-                            textTransform: "uppercase",
-                            color: "#FFFFFF",
-                            transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
-                        }}
+                        className="group inline-flex items-center gap-3 px-8 py-4 border border-white/30 rounded-full text-mono text-xs tracking-[0.05em] uppercase text-white transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)]"
                     >
                         Work With Us
                         <svg

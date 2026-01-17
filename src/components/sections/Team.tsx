@@ -22,15 +22,9 @@ const BACKED_BY = [
 function LogoPlaceholder({ name, width }: { name: string; width: number }) {
     return (
         <div
-            className="flex items-center justify-center px-6"
+            className="flex items-center justify-center px-6 text-lg font-normal tracking-[-0.02em] text-white opacity-80 whitespace-nowrap"
             style={{
-                fontFamily: '"Pragmatica Cond", Arial, sans-serif',
-                fontSize: "18px",
-                fontWeight: 400,
-                letterSpacing: "-0.02em",
-                color: "#FFFFFF",
-                opacity: 0.8,
-                whiteSpace: "nowrap",
+                fontFamily: 'var(--font-display)',
             }}
         >
             {name}
@@ -83,40 +77,22 @@ export function Team() {
             <div className="w-full max-w-7xl mx-auto px-6">
                 {/* Section header */}
                 <div className="flex flex-col items-center text-center mb-16 animate-in">
-                    <div
-                        className="mb-4"
-                        style={{
-                            fontFamily: '"Roboto Mono", monospace',
-                            fontSize: "11px",
-                            letterSpacing: "0.1em",
-                            textTransform: "uppercase",
-                            color: "#888888",
-                        }}
-                    >
+                    <div className="mb-4 section-label text-[#888888]">
                         Our Team
                     </div>
                     <h2
+                        className="text-heading-xl text-white leading-[1.1]"
                         style={{
-                            fontFamily: '"Pragmatica Cond", Arial, sans-serif',
                             fontSize: "clamp(32px, 5vw, 48px)",
-                            fontWeight: 400,
-                            letterSpacing: "-0.02em",
-                            textTransform: "uppercase",
-                            color: "#FFFFFF",
-                            lineHeight: 1.1,
                         }}
                     >
                         We&apos;re AI Experts From the
                         <br />
                         World&apos;s Leading Organizations
                     </h2>
-                    <p
-                        className="mt-6 max-w-md text-center"
+                    <p className="mt-6 max-w-md text-center text-base leading-relaxed text-white/60"
                         style={{
-                            fontFamily: '"Pragmatica Cond", Arial, sans-serif',
-                            fontSize: "16px",
-                            lineHeight: 1.6,
-                            color: "rgba(255, 255, 255, 0.6)",
+                            fontFamily: 'var(--font-display)',
                         }}
                     >
                         Now, we&apos;re helping the next generation of category leaders
@@ -136,16 +112,7 @@ export function Team() {
 
                 {/* Backed by section */}
                 <div className="text-center animate-in">
-                    <div
-                        className="mb-8"
-                        style={{
-                            fontFamily: '"Roboto Mono", monospace',
-                            fontSize: "11px",
-                            letterSpacing: "0.1em",
-                            textTransform: "uppercase",
-                            color: "#888888",
-                        }}
-                    >
+                    <div className="mb-8 section-label text-[#888888]">
                         Our Work is Backed By
                     </div>
                     <div className="flex items-center justify-center gap-12">

@@ -100,12 +100,10 @@ export function Services() {
             <div
                 className="absolute inset-0 pointer-events-none"
                 style={{
-                    backgroundImage:
-                        "url('https://cdn.prod.website-files.com/68532a35829494931a29b25b/68b0a06762f9bbbda09e68a5_Hero.webp')",
+                    backgroundImage: "url('/images/services-background.webp')",
                     backgroundSize: "cover",
                     backgroundPosition: "center",
-                    opacity: 0.4,
-                    filter: "grayscale(100%) contrast(1.2)"
+                    opacity: 0.6,
                 }}
             />
 

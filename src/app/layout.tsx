@@ -1,14 +1,7 @@
 import type { Metadata } from "next";
-import { Roboto_Mono, Roboto_Condensed } from "next/font/google";
+import { Roboto_Mono } from "next/font/google";
+import "@fontsource-variable/fraunces";
 import "./globals.css";
-
-// Roboto Condensed as approximation for Pragmatica Cond
-const robotoCondensed = Roboto_Condensed({
-  subsets: ["latin"],
-  variable: "--font-pragmatica",
-  display: "swap",
-  weight: ["300", "400", "700"],
-});
 
 // Roboto Mono for monospace elements
 const robotoMono = Roboto_Mono({
@@ -39,9 +32,18 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${robotoCondensed.variable} ${robotoMono.variable}`}
+      className={robotoMono.variable}
       suppressHydrationWarning
     >
+      <head>
+        {/* Syne (Display) & Space Mono (System) & Fraunces (Accent) */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400..800&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body suppressHydrationWarning>{children}</body>
     </html>
   );
