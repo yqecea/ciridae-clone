@@ -36,8 +36,8 @@ const SERVICES = [
 
 function ServiceIcon({ type }: { type: string }) {
     return (
-        <div className="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center">
-            <LogoConstellation className="w-full h-full opacity-80" />
+        <div className="w-20 h-20 md:w-24 md:h-24 flex items-center justify-center rounded-full bg-white/5 border border-white/10">
+            <LogoConstellation className="w-12 h-12 md:w-16 md:h-16 opacity-80" />
         </div>
     );
 }
@@ -51,8 +51,8 @@ export function Services() {
             const cards = cardsRef.current?.querySelectorAll(".service-card");
 
             if (cards) {
-                // Stagger cards horizontally as you scroll
-                gsap.set(cards, { xPercent: 0 });
+                // Initial setup
+                gsap.set(cards, { opacity: 0, y: 100 });
 
                 ScrollTrigger.create({
                     trigger: sectionRef.current,
@@ -63,13 +63,25 @@ export function Services() {
                     onUpdate: (self) => {
                         const progress = self.progress;
                         cards.forEach((card, i) => {
-                            const cardProgress = Math.max(
-                                0,
-                                Math.min(1, (progress - i * 0.25) * 4)
-                            );
-                            gsap.set(card, {
-                                opacity: 1 - Math.abs(cardProgress - 0.5) * 0.5,
-                            });
+                            // Sophisticated staggering logic
+                            const start = i * 0.2;
+                            const end = start + 0.4;
+
+                            // Fade in and move up
+                            if (progress >= start && progress < end) {
+                                const localProgress = (progress - start) / (end - start);
+                                gsap.to(card, {
+                                    opacity: localProgress,
+                                    y: 100 * (1 - localProgress),
+                                    scale: 0.9 + (0.1 * localProgress),
+                                    duration: 0,
+                                    overwrite: true
+                                });
+                            } else if (progress >= end) {
+                                gsap.to(card, { opacity: 1, y: 0, scale: 1, duration: 0, overwrite: true });
+                            } else {
+                                gsap.to(card, { opacity: 0, y: 100, scale: 0.9, duration: 0, overwrite: true });
+                            }
                         });
                     },
                 });
@@ -84,7 +96,7 @@ export function Services() {
             ref={sectionRef}
             className="relative min-h-[300vh]"
             style={{
-                background: "#0B0B0B",
+                background: "#050505",
             }}
         >
             {/* Background image - stars/mountains */}
@@ -95,7 +107,8 @@ export function Services() {
                         "url('https://cdn.prod.website-files.com/68532a35829494931a29b25b/68b0a06762f9bbbda09e68a5_Hero.webp')",
                     backgroundSize: "cover",
                     backgroundPosition: "center",
-                    opacity: 0.6,
+                    opacity: 0.4,
+                    filter: "grayscale(100%) contrast(1.2)"
                 }}
             />
 
@@ -104,78 +117,48 @@ export function Services() {
                 className="absolute inset-0 pointer-events-none"
                 style={{
                     background:
-                        "linear-gradient(180deg, #0B0B0B 0%, transparent 20%, transparent 80%, #0B0B0B 100%)",
+                        "linear-gradient(180deg, #050505 0%, transparent 20%, transparent 80%, #050505 100%)",
                 }}
             />
 
             {/* Cards container */}
-            <div className="cards-container sticky top-0 min-h-screen flex items-center justify-center py-20 px-4">
+            <div className="cards-container sticky top-0 min-h-screen flex items-center justify-center py-20 px-4 overflow-hidden">
                 <div
                     ref={cardsRef}
-                    className="flex flex-col md:flex-row items-stretch justify-center gap-6 max-w-[1680px]"
+                    className="flex flex-col md:flex-row items-stretch justify-center gap-8 max-w-[1680px]"
                 >
                     {SERVICES.map((service, index) => (
                         <div
                             key={service.id}
-                            className="service-card glass-card flex flex-col p-8"
+                            className="service-card glass-panel flex flex-col p-10 md:p-12"
                             style={{
                                 width: "100%",
                                 maxWidth: "542px",
-                                minHeight: "712px",
-                                background: "rgba(173, 173, 173, 0.2)",
-                                backdropFilter: "blur(50px)",
-                                WebkitBackdropFilter: "blur(50px)",
-                                borderRadius: "10px",
-                                border: "1px solid rgba(255, 255, 255, 0.1)",
+                                minHeight: "720px",
                             }}
                         >
                             {/* Tag pill */}
-                            <div
-                                className="inline-flex self-start mb-6"
-                                style={{
-                                    padding: "5px 11px",
-                                    border: "1px solid rgba(255, 255, 255, 0.8)",
-                                    borderRadius: "999px",
-                                    fontFamily: '"Roboto Mono", monospace',
-                                    fontSize: "14px",
-                                    letterSpacing: "-0.02em",
-                                    color: "#FFFFFF",
-                                }}
-                            >
+                            <div className="btn-pill self-start mb-12 border-white/20">
                                 {service.id} — {service.total}
                             </div>
 
                             {/* Title */}
-                            <h3
-                                className="mb-6"
-                                style={{
-                                    fontFamily: '"Pragmatica Cond", Arial, sans-serif',
-                                    fontSize: "24px",
-                                    fontWeight: 400,
-                                    letterSpacing: "-0.02em",
-                                    textTransform: "uppercase",
-                                    color: "#FFFFFF",
-                                }}
-                            >
+                            <h3 className="text-heading-lg mb-8 text-white">
                                 {service.title}
                             </h3>
 
                             {/* Icon */}
-                            <div className="flex-1 flex items-center justify-center my-8">
+                            <div className="flex-1 flex items-center justify-center my-12">
                                 <ServiceIcon type={service.icon} />
                             </div>
 
                             {/* Description */}
-                            <p
-                                style={{
-                                    fontFamily: '"Pragmatica Cond", Arial, sans-serif',
-                                    fontSize: "14px",
-                                    lineHeight: "1.5",
-                                    color: "rgba(255, 255, 255, 0.7)",
-                                }}
-                            >
+                            <p className="text-subheading leading-relaxed text-white/60">
                                 {service.description}
                             </p>
+
+                            {/* Bottom aesthetic line */}
+                            <div className="w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mt-12" />
                         </div>
                     ))}
                 </div>

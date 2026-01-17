@@ -17,39 +17,57 @@ export function Manifesto() {
 
     useEffect(() => {
         const ctx = gsap.context(() => {
-            // Text decode animation on scroll
-            const chars = textRef.current?.querySelectorAll(".char");
-
-            if (chars) {
-                gsap.set(chars, { opacity: 0.2 });
-
-                ScrollTrigger.create({
+            // Light Leak Animation
+            gsap.to(".light-leak", {
+                y: -50,
+                opacity: 0.6,
+                scrollTrigger: {
                     trigger: sectionRef.current,
-                    start: "top 80%",
-                    end: "center center",
-                    scrub: 1,
-                    onUpdate: (self) => {
-                        const progress = self.progress;
-                        chars.forEach((char, i) => {
-                            const charProgress = i / chars.length;
-                            if (progress > charProgress) {
-                                gsap.to(char, { opacity: 1, duration: 0.1 });
-                            }
-                        });
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: 1.5,
+                },
+            });
+
+            // Blur-to-Focus Typography Animation
+            const words = textRef.current?.querySelectorAll(".word");
+
+            if (words) {
+                gsap.fromTo(
+                    words,
+                    {
+                        filter: "blur(15px)",
+                        opacity: 0,
+                        y: 30
                     },
-                });
+                    {
+                        filter: "blur(0px)",
+                        opacity: 1,
+                        y: 0,
+                        stagger: 0.05,
+                        duration: 1,
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: textRef.current,
+                            start: "top 75%",
+                            end: "center center",
+                            scrub: 1,
+                        },
+                    }
+                );
             }
 
-            // Logo fade in
+            // Logo rotation and fade
             gsap.from(logoRef.current, {
                 scrollTrigger: {
                     trigger: sectionRef.current,
-                    start: "40% center",
-                    end: "60% center",
+                    start: "60% center",
+                    end: "80% center",
                     scrub: 1,
                 },
                 opacity: 0,
                 scale: 0.8,
+                rotation: -30,
             });
         }, sectionRef);
 
@@ -59,47 +77,42 @@ export function Manifesto() {
     return (
         <section
             ref={sectionRef}
-            className="relative min-h-[200vh] flex flex-col items-center"
-            style={{ background: "#0B0B0B" }}
+            className="relative min-h-[150vh] flex flex-col items-center"
+            style={{ background: "#050505" }}
         >
+            {/* Cinematic Light Leak Atmosphere */}
+            <div className="light-leak absolute top-0 right-0 w-[800px] h-[800px] pointer-events-none opacity-30 mix-blend-screen"
+                style={{
+                    background: "var(--gradient-light-leak)",
+                    filter: "blur(100px)",
+                    transform: "translate(30%, -30%)"
+                }}
+            />
+
             {/* Sticky container */}
             <div className="sticky top-0 min-h-screen flex flex-col items-center justify-center py-20 px-6">
                 {/* Section label */}
-                <div
-                    className="mb-8"
-                    style={{
-                        fontFamily: '"Roboto Mono", monospace',
-                        fontSize: "11px",
-                        letterSpacing: "0.1em",
-                        textTransform: "uppercase",
-                        color: "#888888",
-                    }}
-                >
+                <div className="section-label mb-12">
                     Ciridae Builds
                 </div>
 
-                {/* Main text with decode effect */}
+                {/* Main text with blur-focus effect */}
                 <div
                     ref={textRef}
-                    className="text-center max-w-5xl mx-auto mb-16"
-                    style={{
-                        fontFamily: '"Pragmatica Cond", Arial, sans-serif',
-                        fontSize: "32px",
-                        lineHeight: "33.6px",
-                        letterSpacing: "-0.64px",
-                        textTransform: "uppercase",
-                        color: "#FFFFFF",
-                    }}
+                    className="text-center max-w-6xl mx-auto mb-24 px-4"
                 >
-                    {MANIFESTO_TEXT.split("").map((char, i) => (
-                        <span key={i} className="char inline-block">
-                            {char === " " ? "\u00A0" : char}
+                    {MANIFESTO_TEXT.split(" ").map((word, i) => (
+                        <span
+                            key={i}
+                            className="word inline-block mr-[0.25em] text-heading-xl leading-none text-white mix-blend-difference"
+                        >
+                            {word}
                         </span>
                     ))}
                 </div>
 
                 {/* Constellation logo */}
-                <div ref={logoRef}>
+                <div ref={logoRef} className="opacity-50 mix-blend-overlay">
                     <LogoConstellation className="w-40 h-40 md:w-52 md:h-52" />
                 </div>
             </div>
