@@ -13,6 +13,7 @@ description: Billion-dollar interface standards. Build flagship products.
 - [Render Integrity](./render-integrity.md)
 - [Output Format](./output.md)
 - [PRIME Mode](./prime-mode.md)
+- [Awwwards Patterns](./awwwards-patterns.md) - CRITICAL for premium sites
 
 ---
 

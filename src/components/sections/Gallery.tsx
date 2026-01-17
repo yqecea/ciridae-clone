@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef, useEffect } from "react";
-import { gsap } from "@/lib/gsap";
+import { useRef } from "react";
+import { gsap, useGSAP } from "@/lib/gsap";
 import Image from "next/image";
 
 interface GalleryImage {
@@ -109,45 +109,42 @@ export function Gallery() {
     const sectionRef = useRef<HTMLElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
 
-    useEffect(() => {
-        const ctx = gsap.context(() => {
-            // Parallax effect on scroll
-            const cards = containerRef.current?.querySelectorAll(".gallery-card");
+    // Using useGSAP hook for proper cleanup (Context7 best practice)
+    useGSAP(() => {
+        // Parallax effect on scroll
+        const cards = containerRef.current?.querySelectorAll(".gallery-card");
 
-            if (cards) {
-                cards.forEach((card, i) => {
-                    const depth = 0.1 + (i * 0.05);
+        if (cards) {
+            cards.forEach((card, i) => {
+                const depth = 0.1 + (i * 0.05);
 
-                    gsap.to(card, {
-                        y: () => -100 * depth,
-                        scrollTrigger: {
-                            trigger: sectionRef.current,
-                            start: "top bottom",
-                            end: "bottom top",
-                            scrub: 1.5,
-                        },
-                    });
+                gsap.to(card, {
+                    y: () => -100 * depth,
+                    scrollTrigger: {
+                        trigger: sectionRef.current,
+                        start: "top bottom",
+                        end: "bottom top",
+                        scrub: 1.5,
+                    },
                 });
-            }
-
-            // Fade in animation
-            gsap.from(".gallery-card", {
-                scrollTrigger: {
-                    trigger: sectionRef.current,
-                    start: "top 80%",
-                    toggleActions: "play none none reverse",
-                },
-                opacity: 0,
-                y: 60,
-                scale: 0.95,
-                duration: 1,
-                stagger: 0.15,
-                ease: "power3.out",
             });
-        }, sectionRef);
+        }
 
-        return () => ctx.revert();
-    }, []);
+        // Fade in animation
+        gsap.from(".gallery-card", {
+            scrollTrigger: {
+                trigger: sectionRef.current,
+                start: "top 80%",
+                toggleActions: "play none none reverse",
+            },
+            opacity: 0,
+            y: 60,
+            scale: 0.95,
+            duration: 1,
+            stagger: 0.15,
+            ease: "power3.out",
+        });
+    }, { scope: sectionRef });
 
     return (
         <section

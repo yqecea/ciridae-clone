@@ -3,6 +3,7 @@
 import { useRef, useEffect } from "react";
 import { gsap } from "@/lib/gsap";
 import Image from "next/image";
+import { MagneticButton } from "../ui/MagneticButton";
 
 export function Contact() {
     const sectionRef = useRef<HTMLElement>(null);
@@ -75,6 +76,7 @@ export function Contact() {
             <div
                 className="contact-image-left absolute left-0 top-1/4 hidden lg:block"
                 style={{ width: "380px", height: "480px" }}
+                data-cursor-text="Art"
             >
                 <div
                     className="relative w-full h-full overflow-hidden"
@@ -87,7 +89,7 @@ export function Contact() {
                         src="/images/contact-left.webp"
                         alt="Modern sculpture"
                         fill
-                        className="object-cover"
+                        className="object-cover transition-transform duration-700 hover:scale-105"
                         sizes="280px"
                     />
                 </div>
@@ -97,6 +99,7 @@ export function Contact() {
             <div
                 className="contact-image-right absolute right-0 top-1/3 hidden lg:block"
                 style={{ width: "420px", height: "520px" }}
+                data-cursor-text="Design"
             >
                 <div
                     className="relative w-full h-full overflow-hidden"
@@ -109,7 +112,7 @@ export function Contact() {
                         src="/images/contact-right.webp"
                         alt="Modern architecture"
                         fill
-                        className="object-cover"
+                        className="object-cover transition-transform duration-700 hover:scale-105"
                         sizes="320px"
                     />
                 </div>
@@ -136,27 +139,31 @@ export function Contact() {
                     </h2>
                 </div>
 
-                {/* CTA Button */}
-                <a
-                    href="#careers"
-                    className="btn-pill"
-                    style={{
-                        padding: "18px 48px",
-                        borderColor: "rgba(255, 255, 255, 0.4)",
-                        fontSize: "12px",
-                    }}
-                >
-                    Work With Us
-                </a>
+                {/* CTA Button - Now with magnetic effect */}
+                <MagneticButton strength={0.3}>
+                    <a
+                        href="#careers"
+                        className="btn-pill btn-hover-scale"
+                        style={{
+                            padding: "18px 48px",
+                            borderColor: "rgba(255, 255, 255, 0.4)",
+                            fontSize: "12px",
+                        }}
+                        data-cursor-text="Apply"
+                    >
+                        Work With Us
+                    </a>
+                </MagneticButton>
             </div>
 
-            {/* Decorative elements */}
+            {/* Decorative elements - Light leak */}
             <div
-                className="absolute inset-0 pointer-events-none"
+                className="absolute inset-0 pointer-events-none light-leak"
                 style={{
-                    background: "radial-gradient(ellipse 60% 40% at 50% 50%, rgba(204, 100, 55, 0.05) 0%, transparent 60%)",
+                    background: "radial-gradient(ellipse 60% 40% at 50% 50%, rgba(204, 100, 55, 0.08) 0%, transparent 60%)",
                 }}
             />
         </section>
     );
 }
+

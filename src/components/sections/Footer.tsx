@@ -1,5 +1,7 @@
 "use client";
 
+import { MagneticButton } from "../ui/MagneticButton";
+
 const NAV_LINKS = [
     { label: "Home", href: "/" },
     { label: "About", href: "#about" },
@@ -15,9 +17,9 @@ export function Footer() {
                 background: "#0B0B0B",
             }}
         >
-            {/* Nebula background effect */}
+            {/* Nebula background effect - Light leak from awwwards patterns */}
             <div
-                className="absolute inset-0 opacity-60 pointer-events-none"
+                className="absolute inset-0 opacity-60 pointer-events-none light-leak"
                 style={{
                     background: "radial-gradient(ellipse at center, rgba(30, 80, 120, 0.2) 0%, transparent 70%)",
                     filter: "blur(60px)",
@@ -56,12 +58,12 @@ export function Footer() {
                 <div className="max-w-4xl mx-auto w-full flex flex-col items-center justify-center flex-1">
                     {/* Star icon and Logo */}
                     <div className="flex flex-col items-center mb-12">
-                        {/* Constellation star icon */}
-                        <div className="relative w-16 h-16 mb-4">
+                        {/* Constellation star icon with glow */}
+                        <div className="relative w-16 h-16 mb-4 glow-text">
                             <svg
                                 viewBox="0 0 64 64"
                                 fill="none"
-                                className="w-full h-full"
+                                className="w-full h-full icon-animated"
                                 style={{ filter: "drop-shadow(0 0 8px rgba(255, 255, 255, 0.3))" }}
                             >
                                 {/* Center star */}
@@ -83,38 +85,40 @@ export function Footer() {
                         </div>
                     </div>
 
-                    {/* CTA Button */}
+                    {/* CTA Button - Magnetic effect */}
                     <div className="mb-12">
-                        <a
-                            href="#contact"
-                            className="inline-block"
-                            style={{
-                                padding: "16px 40px",
-                                border: "1px solid rgba(255, 255, 255, 0.35)",
-                                borderRadius: "999px",
-                                fontFamily: '"Roboto Mono", monospace',
-                                fontSize: "11px",
-                                letterSpacing: "0.08em",
-                                textTransform: "uppercase",
-                                color: "#FFFFFF",
-                                transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
-                            }}
-                        >
-                            Begin the Transformation
-                        </a>
+                        <MagneticButton strength={0.4}>
+                            <a
+                                href="#contact"
+                                className="inline-block btn-hover-scale ripple"
+                                style={{
+                                    padding: "16px 40px",
+                                    border: "1px solid rgba(255, 255, 255, 0.35)",
+                                    borderRadius: "999px",
+                                    fontFamily: '"Roboto Mono", monospace',
+                                    fontSize: "11px",
+                                    letterSpacing: "0.08em",
+                                    textTransform: "uppercase",
+                                    color: "#FFFFFF",
+                                    transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+                                }}
+                                data-cursor-text="Start"
+                            >
+                                Begin the Transformation
+                            </a>
+                        </MagneticButton>
                     </div>
 
-                    {/* Centered navigation */}
+                    {/* Centered navigation - link underline animation */}
                     <nav className="flex flex-col items-center gap-3 mb-12">
                         {NAV_LINKS.map((link) => (
                             <a
                                 key={link.label}
                                 href={link.href}
+                                className="link-underline hover:text-white text-mono text-sm"
                                 style={{
                                     color: "rgba(255, 255, 255, 0.5)",
-                                    transition: "color 0.2s",
                                 }}
-                                className="hover:text-white text-mono text-sm"
                             >
                                 {link.label}
                             </a>
@@ -126,21 +130,19 @@ export function Footer() {
                         <div className="flex flex-wrap justify-center gap-4 md:gap-6">
                             <a
                                 href="#privacy"
+                                className="link-underline hover:text-white/60 text-mono text-[10px] tracking-[0.05em] uppercase"
                                 style={{
                                     color: "rgba(255, 255, 255, 0.35)",
-                                    transition: "color 0.2s",
                                 }}
-                                className="hover:text-white/60 text-mono text-[10px] tracking-[0.05em] uppercase"
                             >
                                 Privacy Policy
                             </a>
                             <a
                                 href="#terms"
+                                className="link-underline hover:text-white/60 text-mono text-[10px] tracking-[0.05em] uppercase"
                                 style={{
                                     color: "rgba(255, 255, 255, 0.35)",
-                                    transition: "color 0.2s",
                                 }}
-                                className="hover:text-white/60 text-mono text-[10px] tracking-[0.05em] uppercase"
                             >
                                 Terms and Conditions
                             </a>
@@ -156,6 +158,7 @@ export function Footer() {
                     </div>
                 </div>
             </div>
-        </footer >
+        </footer>
     );
 }
+

@@ -12,6 +12,7 @@ const SERVICES = [
         description:
             "We map how work actually happens across people, systems, and handoffs. We redesign those workflows around AI as software — with human oversight — can execute the work end-to-end.",
         icon: "workflow",
+        cursorLabel: "View",
     },
     {
         id: "02",
@@ -20,6 +21,7 @@ const SERVICES = [
         description:
             "We build the software that runs the redesigned workflow in production. This includes unified data, encoded business logic, AI reasoning, and integration with existing systems of record.",
         icon: "system",
+        cursorLabel: "View",
     },
     {
         id: "03",
@@ -28,13 +30,14 @@ const SERVICES = [
         description:
             "We operate the system and take responsibility for their performance over time. Software executes the work continuously; humans oversee exceptions and approvals.",
         icon: "control",
+        cursorLabel: "View",
     },
 ];
 
 function ServiceIcon({ type }: { type: string }) {
     return (
-        <div className="w-20 h-20 md:w-24 md:h-24 flex items-center justify-center rounded-full bg-white/5 border border-white/10">
-            <LogoConstellation className="w-12 h-12 md:w-16 md:h-16 opacity-80" />
+        <div className="w-20 h-20 md:w-24 md:h-24 flex items-center justify-center rounded-full bg-white/5 border border-white/10 transition-all duration-500 group-hover:border-[var(--accent)]/50 group-hover:scale-110">
+            <LogoConstellation className="w-12 h-12 md:w-16 md:h-16 opacity-80 transition-opacity duration-500 group-hover:opacity-100" />
         </div>
     );
 }
@@ -125,20 +128,22 @@ export function Services() {
                     {SERVICES.map((service, index) => (
                         <div
                             key={service.id}
-                            className="service-card glass-panel flex flex-col p-10 md:p-12"
+                            className="service-card group glass-panel flex flex-col p-10 md:p-12 cursor-pointer transition-all duration-500 hover:border-[var(--accent)]/30"
                             style={{
                                 width: "100%",
                                 maxWidth: "542px",
                                 minHeight: "720px",
                             }}
+                            data-cursor-text={service.cursorLabel}
+                            data-cursor-hover
                         >
                             {/* Tag pill */}
-                            <div className="btn-pill self-start mb-12 border-white/20">
+                            <div className="btn-pill self-start mb-12 border-white/20 transition-all duration-300 group-hover:border-[var(--accent)]/50 group-hover:text-[var(--accent)]">
                                 {service.id} — {service.total}
                             </div>
 
                             {/* Title */}
-                            <h3 className="text-heading-lg mb-8 text-white">
+                            <h3 className="text-heading-lg mb-8 text-white transition-colors duration-300 group-hover:text-[var(--accent)]">
                                 {service.title}
                             </h3>
 
@@ -148,12 +153,12 @@ export function Services() {
                             </div>
 
                             {/* Description */}
-                            <p className="text-subheading leading-relaxed text-white/60">
+                            <p className="text-subheading leading-relaxed text-white/60 transition-colors duration-300 group-hover:text-white/80">
                                 {service.description}
                             </p>
 
-                            {/* Bottom aesthetic line */}
-                            <div className="w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mt-12" />
+                            {/* Bottom aesthetic line - animates on hover */}
+                            <div className="w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mt-12 transition-all duration-500 group-hover:via-[var(--accent)]/50" />
                         </div>
                     ))}
                 </div>
@@ -161,3 +166,4 @@ export function Services() {
         </section>
     );
 }
+

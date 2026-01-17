@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import { Roboto_Mono } from "next/font/google";
 import "@fontsource-variable/fraunces";
 import "./globals.css";
+import SmoothScroll from "@/components/SmoothScroll";
+import { CustomCursor } from "@/components/ui/CustomCursor";
+import { Preloader } from "@/components/Preloader";
+import { ScrollProgress } from "@/components/ui/ScrollProgress";
 
 // Roboto Mono for monospace elements
 const robotoMono = Roboto_Mono({
@@ -44,7 +48,13 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body suppressHydrationWarning>{children}</body>
+      <body suppressHydrationWarning>
+        <Preloader minDuration={2500} />
+        <CustomCursor />
+        <ScrollProgress />
+        <SmoothScroll>{children}</SmoothScroll>
+      </body>
     </html>
   );
 }
+

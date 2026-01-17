@@ -2,6 +2,12 @@
 
 import { useRef, useCallback } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+// Register ScrollTrigger
+if (typeof window !== "undefined") {
+    gsap.registerPlugin(ScrollTrigger);
+}
 
 export function Hero() {
     const sectionRef = useRef<HTMLElement>(null);
@@ -10,9 +16,39 @@ export function Hero() {
     const leftTextRef = useRef<HTMLDivElement>(null);
     const rightTextRef = useRef<HTMLDivElement>(null);
     const taglineRef = useRef<HTMLDivElement>(null);
+    const backgroundRef = useRef<HTMLDivElement>(null);
 
     // Using official useGSAP hook for automatic cleanup (Context7 best practice)
     const { contextSafe } = useGSAP(() => {
+        // ===== PARALLAX SCROLL EFFECT =====
+        // Background moves slower than content for depth effect
+        if (backgroundRef.current) {
+            gsap.to(backgroundRef.current, {
+                yPercent: 30, // Moves 30% of its height
+                ease: "none",
+                scrollTrigger: {
+                    trigger: sectionRef.current,
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: true, // Synced with scroll position
+                },
+            });
+        }
+
+        // Title parallax - moves faster (opposite direction)
+        if (titleRef.current) {
+            gsap.to(titleRef.current, {
+                y: -80,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: sectionRef.current,
+                    start: "top top",
+                    end: "bottom top",
+                    scrub: 0.5,
+                },
+            });
+        }
+
         // Staggered Entrance Animation
         const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
@@ -96,15 +132,19 @@ export function Hero() {
         >
             {/* ===== CINEMATIC BACKGROUND LAYERS ===== */}
 
-            {/* Layer 1: Cinematic Background Image */}
+            {/* Layer 1: Cinematic Background Image - PARALLAX */}
             <div
-                className="absolute inset-0"
+                ref={backgroundRef}
+                className="absolute inset-0 will-change-transform"
                 style={{
                     backgroundImage: "url('/images/hero-background.webp')",
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                     opacity: 0.7,
                     filter: "blur(2px) saturate(1.2)",
+                    // Slightly oversized to prevent gaps during parallax
+                    top: "-10%",
+                    height: "120%",
                 }}
             />
 
