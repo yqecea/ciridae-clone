@@ -1,10 +1,7 @@
 "use client";
 
-import { useRef, useEffect } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import { useRef, useCallback } from "react";
+import { gsap, useGSAP } from "@/lib/gsap";
 
 export function Hero() {
     const sectionRef = useRef<HTMLElement>(null);
@@ -14,83 +11,82 @@ export function Hero() {
     const rightTextRef = useRef<HTMLDivElement>(null);
     const taglineRef = useRef<HTMLDivElement>(null);
 
-    useEffect(() => {
-        const ctx = gsap.context(() => {
-            // Mouse movement magnetic effect
-            const onMouseMove = (e: MouseEvent) => {
-                if (!logoGroupRef.current) return;
+    // Using official useGSAP hook for automatic cleanup (Context7 best practice)
+    const { contextSafe } = useGSAP(() => {
+        // Staggered Entrance Animation
+        const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-                const { clientX, clientY } = e;
-                const { left, top, width, height } = sectionRef.current?.getBoundingClientRect() || { left: 0, top: 0, width: 0, height: 0 };
-                const centerX = left + width / 2;
-                const centerY = top + height / 2;
-
-                const moveX = (clientX - centerX) * 0.05;
-                const moveY = (clientY - centerY) * 0.05;
-
-                // Move entire logo group slightly
-                gsap.to(logoGroupRef.current, {
-                    x: moveX,
-                    y: moveY,
-                    duration: 1,
-                    ease: "power2.out",
-                });
-
-                // Parallax starts within the logo
-                const stars = logoGroupRef.current.querySelectorAll(".star");
-                stars.forEach((star, i) => {
-                    const depth = 1 + (i % 3) * 0.5;
-                    gsap.to(star, {
-                        x: moveX * depth,
-                        y: moveY * depth,
-                        duration: 1.2,
-                        ease: "power2.out",
-                    });
-                });
-            };
-
-            window.addEventListener("mousemove", onMouseMove);
-
-            // Staggered Entrance Animation
-            const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-
-            // 1. Logo pieces assemble
-            tl.from(logoGroupRef.current?.querySelectorAll("path") || [], {
+        // 1. Logo pieces assemble
+        tl.from(logoGroupRef.current?.querySelectorAll("path") || [], {
+            opacity: 0,
+            scale: 0,
+            y: 50,
+            duration: 1.2,
+            stagger: 0.05,
+            ease: "back.out(1.7)",
+        })
+            // 2. Title reveals with blur removal
+            .from(titleRef.current, {
                 opacity: 0,
-                scale: 0,
-                y: 50,
+                scale: 1.1,
+                filter: "blur(20px)",
+                duration: 1.5,
+                ease: "power4.out",
+            }, "-=0.8")
+            // 3. Side texts
+            .from([leftTextRef.current, rightTextRef.current], {
+                opacity: 0,
+                y: 20,
+                duration: 1,
+                stagger: 0.2,
+            }, "-=1")
+            // 4. Tagline
+            .from(taglineRef.current, {
+                opacity: 0,
+                y: 20,
+                filter: "blur(10px)",
+                duration: 1,
+            }, "-=0.8");
+    }, { scope: sectionRef });
+
+    // Mouse movement handler wrapped in contextSafe for proper cleanup
+    const handleMouseMove = useCallback((e: MouseEvent) => {
+        if (!logoGroupRef.current || !sectionRef.current) return;
+
+        const { clientX, clientY } = e;
+        const rect = sectionRef.current.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+
+        const moveX = (clientX - centerX) * 0.05;
+        const moveY = (clientY - centerY) * 0.05;
+
+        // Move entire logo group slightly
+        gsap.to(logoGroupRef.current, {
+            x: moveX,
+            y: moveY,
+            duration: 1,
+            ease: "power2.out",
+        });
+
+        // Parallax stars within the logo
+        const stars = logoGroupRef.current.querySelectorAll(".star");
+        stars.forEach((star, i) => {
+            const depth = 1 + (i % 3) * 0.5;
+            gsap.to(star, {
+                x: moveX * depth,
+                y: moveY * depth,
                 duration: 1.2,
-                stagger: 0.05,
-                ease: "back.out(1.7)",
-            })
-                // 2. Title reveals with blur removal
-                .from(titleRef.current, {
-                    opacity: 0,
-                    scale: 1.1,
-                    filter: "blur(20px)",
-                    duration: 1.5,
-                    ease: "power4.out",
-                }, "-=0.8")
-                // 3. Side texts
-                .from([leftTextRef.current, rightTextRef.current], {
-                    opacity: 0,
-                    y: 20,
-                    duration: 1,
-                    stagger: 0.2,
-                }, "-=1")
-                // 4. Tagline
-                .from(taglineRef.current, {
-                    opacity: 0,
-                    y: 20,
-                    filter: "blur(10px)",
-                    duration: 1,
-                }, "-=0.8");
-
-            return () => window.removeEventListener("mousemove", onMouseMove);
-        }, sectionRef);
-
-        return () => ctx.revert();
+                ease: "power2.out",
+            });
+        });
     }, []);
+
+    // Separate effect for mouse listener with proper cleanup
+    useGSAP(() => {
+        window.addEventListener("mousemove", handleMouseMove, { passive: true });
+        return () => window.removeEventListener("mousemove", handleMouseMove);
+    }, { dependencies: [handleMouseMove] });
 
     return (
         <section

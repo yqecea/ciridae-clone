@@ -1,11 +1,8 @@
 "use client";
 
 import { useRef, useEffect } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { gsap } from "@/lib/gsap";
 import { LogoConstellation } from "../ui/Logo";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const MANIFESTO_TEXT =
     "WE REDESIGN COMPLEX WORKFLOWS AROUND AI, BUILD THE SYSTEMS THAT EXECUTE THEM, AND OPERATE THOSE SYSTEMS IN PRODUCTION.";

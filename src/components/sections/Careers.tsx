@@ -1,10 +1,7 @@
 "use client";
 
 import { useRef, useEffect } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import { gsap } from "@/lib/gsap";
 
 const DECORATIVE_LABELS = [
     "BUILD THE FUTURE",
@@ -60,7 +57,7 @@ export function Careers() {
             className="relative w-full py-24 md:py-32 overflow-hidden"
             style={{ background: "#0B0B0B" }}
         >
-            <div className="w-full max-w-7xl mx-auto px-6">
+            <div className="w-full max-w-7xl mx-auto px-6" style={{ margin: '0 auto' }}>
                 {/* Section label */}
                 <div
                     className="text-center mb-6"

@@ -37,8 +37,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${robotoCondensed.variable} ${robotoMono.variable}`}>
-      <body>{children}</body>
+    <html
+      lang="en"
+      className={`${robotoCondensed.variable} ${robotoMono.variable}`}
+      suppressHydrationWarning
+    >
+      <body suppressHydrationWarning>{children}</body>
     </html>
   );
 }

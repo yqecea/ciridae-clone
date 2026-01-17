@@ -1,13 +1,14 @@
 "use client";
 
-export function Logo({ className = "", size = "md" }: { className?: string; size?: "sm" | "md" | "lg" }) {
-    const sizes = {
-        sm: { width: 32, height: 32 },
-        md: { width: 48, height: 48 },
-        lg: { width: 80, height: 80 },
-    };
+// Hoisted constant - prevents recreation on every render
+const SIZES = {
+    sm: { width: 32, height: 32 },
+    md: { width: 48, height: 48 },
+    lg: { width: 80, height: 80 },
+} as const;
 
-    const { width, height } = sizes[size];
+export function Logo({ className = "", size = "md" }: { className?: string; size?: "sm" | "md" | "lg" }) {
+    const { width, height } = SIZES[size];
 
     return (
         <svg

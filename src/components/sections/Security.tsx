@@ -1,10 +1,7 @@
 "use client";
 
 import { useRef, useEffect } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import { gsap } from "@/lib/gsap";
 
 const SECURITY_ITEMS = [
     {
@@ -77,7 +74,7 @@ export function Security() {
             className="relative w-full py-24 md:py-32"
             style={{ background: "#0B0B0B" }}
         >
-            <div className="w-full max-w-7xl mx-auto px-6">
+            <div className="w-full max-w-7xl mx-auto px-6" style={{ margin: '0 auto' }}>
                 {/* Section header */}
                 <div className="text-center mb-16 md:mb-24 flex flex-col items-center">
                     <div
