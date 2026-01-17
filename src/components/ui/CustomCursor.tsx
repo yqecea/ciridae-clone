@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import gsap from "gsap";
 
 interface CustomCursorProps {
@@ -14,6 +14,7 @@ interface CustomCursorProps {
 
 /**
  * CustomCursor - Replaces default cursor with animated circle/dot
+ * SSR-safe: only renders after mount on non-touch devices
  */
 export function CustomCursor({
     size = 40,
@@ -27,14 +28,35 @@ export function CustomCursor({
     const dotPos = useRef({ x: 0, y: 0 });
     const [isHovering, setIsHovering] = useState(false);
     const [cursorText, setCursorText] = useState("");
-    const [isTouchDevice, setIsTouchDevice] = useState(true);
+    const [mounted, setMounted] = useState(false);
+    const [isTouchDevice, setIsTouchDevice] = useState(true); // Start true to avoid SSR flash
+
+    // Handle mount and touch detection
+    useEffect(() => {
+        // Check if the device has a FINE pointer (mouse/trackpad)
+        // This is more reliable than blocking on touch because touchscreen laptops
+        // have BOTH fine (mouse) and coarse (touch) pointers
+        const hasFinePointer = window.matchMedia("(pointer: fine)").matches;
+        const hasAnyPointer = window.matchMedia("(any-pointer: fine)").matches;
+
+        // If the device has any fine pointer capability, show the cursor
+        // This ensures touchscreen laptops with mice still get the custom cursor
+        const shouldHideCursor = !hasFinePointer && !hasAnyPointer;
+
+        console.log("[CustomCursor] Mount check:", {
+            hasFinePointer,
+            hasAnyPointer,
+            shouldHideCursor,
+            maxTouchPoints: navigator.maxTouchPoints
+        });
+
+        setIsTouchDevice(shouldHideCursor);
+        setMounted(true);
+    }, []);
 
     useEffect(() => {
-        // Detect touch device
-        const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
-        setIsTouchDevice(isTouch);
-
-        if (isTouch) return;
+        // Wait for mount and ensure not touch device
+        if (!mounted || isTouchDevice) return;
 
         // Mouse move handler - update target position
         const handleMouseMove = (e: MouseEvent) => {
@@ -102,7 +124,7 @@ export function CustomCursor({
             document.body.style.cursor = "";
             document.documentElement.style.cursor = "";
         };
-    }, [size, dotSize]);
+    }, [size, dotSize, mounted, isTouchDevice]);
 
     // Scale animation on hover
     useEffect(() => {
@@ -121,10 +143,10 @@ export function CustomCursor({
             duration: 0.3,
             ease: "power2.out",
         });
-    }, [isHovering, cursorText, isTouchDevice]);
+    }, [isHovering, cursorText, isTouchDevice, mounted]);
 
-    // Don't render on touch devices
-    if (isTouchDevice) return null;
+    // Don't render on touch devices or before mount
+    if (!mounted || isTouchDevice) return null;
 
     return (
         <>

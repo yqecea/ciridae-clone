@@ -3,6 +3,8 @@
 import { useRef, useCallback } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrambleText } from "@/components/ui/TextEffects";
+import { TextReveal } from "@/components/ui/TextReveal";
 
 // Register ScrollTrigger
 if (typeof window !== "undefined") {
@@ -191,10 +193,12 @@ export function Hero() {
                     className="absolute left-6 md:left-12 top-1/2 -translate-y-1/2 hidden md:block"
                     style={{ writingMode: "vertical-rl", textOrientation: "mixed" }}
                 >
-                    <span className="text-mono text-xs tracking-[0.15em] opacity-35 rotate-180">
-                        Automate the Mundane
-                    </span>
-
+                    <ScrambleText
+                        text="Automate the Mundane"
+                        duration={2}
+                        revealDelay={0.8}
+                        className="text-mono text-xs tracking-[0.15em] opacity-35 rotate-180"
+                    />
                 </div>
 
                 {/* Center Core */}
@@ -285,9 +289,12 @@ export function Hero() {
                     className="absolute right-6 md:right-12 top-1/2 -translate-y-1/2 hidden md:block"
                     style={{ writingMode: "vertical-rl", textOrientation: "mixed" }}
                 >
-                    <span className="text-mono text-xs tracking-[0.15em] opacity-35">
-                        Unleash the Remarkable
-                    </span>
+                    <ScrambleText
+                        text="Unleash the Remarkable"
+                        duration={2}
+                        revealDelay={1.2}
+                        className="text-mono text-xs tracking-[0.15em] opacity-35"
+                    />
                 </div>
             </div>
 

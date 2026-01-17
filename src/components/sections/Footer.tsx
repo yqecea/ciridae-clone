@@ -90,7 +90,7 @@ export function Footer() {
                         <MagneticButton strength={0.4}>
                             <a
                                 href="#contact"
-                                className="inline-block btn-hover-scale ripple"
+                                className="inline-block btn-hover-scale ripple hover:shadow-[0_0_40px_rgba(204,100,55,0.6)] hover:border-[var(--accent)]! hover:bg-[var(--accent)]/20 hover:scale-110"
                                 style={{
                                     padding: "16px 40px",
                                     border: "1px solid rgba(255, 255, 255, 0.35)",

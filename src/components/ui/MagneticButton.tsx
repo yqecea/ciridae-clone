@@ -148,3 +148,87 @@ export function MagneticLink({
         </a>
     );
 }
+
+/**
+ * MagneticWrapper - Magnetic effect for wrapping any child element
+ * 
+ * Use this when you need to wrap interactive elements like buttons or
+ * links without creating invalid HTML (nested buttons).
+ */
+interface MagneticWrapperProps {
+    children: ReactNode;
+    strength?: number;
+    className?: string;
+}
+
+export function MagneticWrapper({
+    children,
+    strength = 0.4,
+    className = "",
+}: MagneticWrapperProps) {
+    const ref = useRef<HTMLDivElement>(null);
+    const contentRef = useRef<HTMLDivElement>(null);
+
+    const handleMouseMove = useCallback(
+        (e: React.MouseEvent) => {
+            if (!ref.current) return;
+
+            const rect = ref.current.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+
+            // Move wrapper
+            gsap.to(ref.current, {
+                x: x * strength,
+                y: y * strength,
+                duration: 0.4,
+                ease: "power2.out",
+            });
+
+            // Move content slightly more for depth
+            if (contentRef.current) {
+                gsap.to(contentRef.current, {
+                    x: x * strength * 0.3,
+                    y: y * strength * 0.3,
+                    duration: 0.4,
+                    ease: "power2.out",
+                });
+            }
+        },
+        [strength]
+    );
+
+    const handleMouseLeave = useCallback(() => {
+        if (!ref.current) return;
+
+        // Elastic snap back
+        gsap.to(ref.current, {
+            x: 0,
+            y: 0,
+            duration: 0.7,
+            ease: "elastic.out(1, 0.3)",
+        });
+
+        if (contentRef.current) {
+            gsap.to(contentRef.current, {
+                x: 0,
+                y: 0,
+                duration: 0.7,
+                ease: "elastic.out(1, 0.3)",
+            });
+        }
+    }, []);
+
+    return (
+        <div
+            ref={ref}
+            className={`${className} will-change-transform inline-block`}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+        >
+            <div ref={contentRef} className="inline-block">
+                {children}
+            </div>
+        </div>
+    );
+}

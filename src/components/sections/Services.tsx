@@ -36,8 +36,8 @@ const SERVICES = [
 
 function ServiceIcon({ type }: { type: string }) {
     return (
-        <div className="w-20 h-20 md:w-24 md:h-24 flex items-center justify-center rounded-full bg-white/5 border border-white/10 transition-all duration-500 group-hover:border-[var(--accent)]/50 group-hover:scale-110">
-            <LogoConstellation className="w-12 h-12 md:w-16 md:h-16 opacity-80 transition-opacity duration-500 group-hover:opacity-100" />
+        <div className="w-20 h-20 md:w-24 md:h-24 flex items-center justify-center rounded-full bg-white/5 border border-white/10 transition-all duration-500 group-hover:border-[var(--accent)] group-hover:scale-125 group-hover:shadow-[0_0_30px_rgba(204,100,55,0.5)]">
+            <LogoConstellation className="w-12 h-12 md:w-16 md:h-16 opacity-80 transition-all duration-500 group-hover:opacity-100 group-hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]" />
         </div>
     );
 }
@@ -128,7 +128,7 @@ export function Services() {
                     {SERVICES.map((service, index) => (
                         <div
                             key={service.id}
-                            className="service-card group glass-panel flex flex-col p-10 md:p-12 cursor-pointer transition-all duration-500 hover:border-[var(--accent)]/30"
+                            className="service-card group glass-panel flex flex-col p-10 md:p-12 cursor-pointer transition-all duration-500 hover:border-[var(--accent)] hover:shadow-[0_0_60px_rgba(204,100,55,0.3)] hover:scale-[1.02] hover:bg-white/5"
                             style={{
                                 width: "100%",
                                 maxWidth: "542px",
@@ -138,7 +138,7 @@ export function Services() {
                             data-cursor-hover
                         >
                             {/* Tag pill */}
-                            <div className="btn-pill self-start mb-12 border-white/20 transition-all duration-300 group-hover:border-[var(--accent)]/50 group-hover:text-[var(--accent)]">
+                            <div className="btn-pill self-start mb-12 border-white/20 transition-all duration-300 group-hover:border-[var(--accent)] group-hover:text-[var(--accent)] group-hover:bg-[var(--accent)]/10">
                                 {service.id} — {service.total}
                             </div>
 
