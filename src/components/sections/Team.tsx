@@ -22,7 +22,7 @@ const BACKED_BY = [
 function LogoPlaceholder({ name, width }: { name: string; width: number }) {
     return (
         <div
-            className="flex items-center justify-center px-6 text-lg font-normal tracking-[-0.02em] text-white opacity-80 whitespace-nowrap"
+            className="flex items-center justify-center px-3 sm:px-6 text-sm sm:text-lg font-normal tracking-[-0.02em] text-white opacity-80 whitespace-nowrap flex-shrink-0"
             style={{
                 fontFamily: 'var(--font-display)',
             }}
@@ -71,10 +71,10 @@ export function Team() {
     return (
         <section
             ref={sectionRef}
-            className="relative w-full py-32 overflow-hidden"
+            className="relative w-full py-24 sm:py-32 overflow-hidden"
             style={{ background: "#0B0B0B" }}
         >
-            <div className="w-full max-w-7xl mx-auto px-6">
+            <div className="w-full max-w-7xl mx-auto px-4 sm:px-6">
                 {/* Section header */}
                 <div className="flex flex-col items-center text-center mb-16 animate-in">
                     <div className="mb-4 section-label text-[#888888]">
@@ -115,7 +115,7 @@ export function Team() {
                     <div className="mb-8 section-label text-[#888888]">
                         Our Work is Backed By
                     </div>
-                    <div className="flex items-center justify-center gap-12">
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-12">
                         {BACKED_BY.map((investor) => (
                             <LogoPlaceholder
                                 key={investor.name}

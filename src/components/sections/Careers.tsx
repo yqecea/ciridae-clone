@@ -54,10 +54,10 @@ export function Careers() {
     return (
         <section
             ref={sectionRef}
-            className="relative w-full py-24 md:py-32 overflow-hidden"
+            className="relative w-full py-20 sm:py-24 md:py-32 overflow-hidden"
             style={{ background: "#0B0B0B" }}
         >
-            <div className="w-full max-w-7xl mx-auto px-6" style={{ margin: '0 auto' }}>
+            <div className="w-full max-w-7xl mx-auto px-4 sm:px-6" style={{ margin: '0 auto' }}>
                 {/* Section label */}
                 <div className="section-label mb-6 text-center text-[#888888]">
                     Careers
@@ -78,10 +78,10 @@ export function Careers() {
                     Intelligent Systems.
                 </h2>
 
-                {/* Decorative vertical labels */}
+                {/* Decorative vertical labels - hidden on mobile */}
                 <div
                     ref={labelsRef}
-                    className="flex flex-col items-center gap-12 mb-16"
+                    className="hidden sm:flex flex-col items-center gap-12 mb-16"
                 >
                     {DECORATIVE_LABELS.map((label, index) => (
                         <div

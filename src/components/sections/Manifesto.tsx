@@ -74,11 +74,11 @@ export function Manifesto() {
     return (
         <section
             ref={sectionRef}
-            className="relative min-h-[150vh] flex flex-col items-center"
+            className="relative min-h-[150vh] flex flex-col items-center overflow-hidden"
             style={{ background: "#050505" }}
         >
-            {/* Cinematic Light Leak Atmosphere */}
-            <div className="light-leak absolute top-0 right-0 w-[800px] h-[800px] pointer-events-none opacity-30 mix-blend-screen"
+            {/* Cinematic Light Leak Atmosphere - responsive, no overflow */}
+            <div className="light-leak absolute top-0 right-0 w-full max-w-[800px] h-[400px] md:h-[800px] pointer-events-none opacity-30 mix-blend-screen"
                 style={{
                     background: "var(--gradient-light-leak)",
                     filter: "blur(100px)",

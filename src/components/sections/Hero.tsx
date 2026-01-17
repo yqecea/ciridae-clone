@@ -301,10 +301,10 @@ export function Hero() {
             {/* Bottom tagline - Matching original text */}
             <div
                 ref={taglineRef}
-                className="absolute bottom-12 left-0 right-0 text-center px-4"
+                className="absolute bottom-12 left-0 right-0 text-center px-6"
             >
                 <div className="flex flex-col items-center gap-2">
-                    <p className="max-w-lg mx-auto text-mono text-xs tracking-[0.08em] uppercase opacity-50 leading-relaxed">
+                    <p className="max-w-lg mx-auto text-mono text-sm md:text-xs tracking-[0.08em] uppercase opacity-50 leading-relaxed break-words">
                         We are re-architecting the<br />
                         businesses of today for a faster,<br />
                         smarter tomorrow

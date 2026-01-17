@@ -91,9 +91,9 @@ export function Navigation() {
                     </nav>
 
                     {/* Footer Info */}
-                    <div className="absolute bottom-8 left-0 right-0 flex items-center justify-between px-8">
-                        <span className="text-mono text-[#888]">The New Intelligence</span>
-                        <div className="flex items-center gap-6">
+                    <div className="absolute bottom-6 sm:bottom-8 left-0 right-0 flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-4 px-4 sm:px-8">
+                        <span className="text-mono text-[#888] text-center sm:text-left order-2 sm:order-1">The New Intelligence</span>
+                        <div className="flex items-center gap-6 order-1 sm:order-2">
                             <a
                                 href="https://linkedin.com"
                                 target="_blank"
@@ -111,7 +111,7 @@ export function Navigation() {
                                 X
                             </a>
                         </div>
-                        <span className="text-mono text-[#888]">
+                        <span className="text-mono text-[#888] text-center sm:text-right order-3 hidden sm:block">
                             All Rights Reserved {new Date().getFullYear()}
                         </span>
                     </div>

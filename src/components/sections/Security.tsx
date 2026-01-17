@@ -71,10 +71,10 @@ export function Security() {
     return (
         <section
             ref={sectionRef}
-            className="relative w-full py-24 md:py-32"
+            className="relative w-full py-20 sm:py-24 md:py-32 overflow-hidden"
             style={{ background: "#0B0B0B" }}
         >
-            <div className="w-full max-w-7xl mx-auto px-6" style={{ margin: '0 auto' }}>
+            <div className="w-full max-w-7xl mx-auto px-4 sm:px-6" style={{ margin: '0 auto' }}>
                 {/* Section header */}
                 <div className="text-center mb-16 md:mb-24 flex flex-col items-center">
                     <div className="mb-4 section-label text-[#888888]">

@@ -94,7 +94,7 @@ export function Services() {
     return (
         <section
             ref={sectionRef}
-            className="relative min-h-[300vh]"
+            className="relative min-h-[200vh] md:min-h-[300vh] overflow-hidden"
             style={{
                 background: "#050505",
             }}
@@ -128,12 +128,7 @@ export function Services() {
                     {SERVICES.map((service, index) => (
                         <div
                             key={service.id}
-                            className="service-card group glass-panel flex flex-col p-10 md:p-12 cursor-pointer transition-all duration-500 hover:border-[var(--accent)] hover:shadow-[0_0_60px_rgba(204,100,55,0.3)] hover:scale-[1.02] hover:bg-white/5"
-                            style={{
-                                width: "100%",
-                                maxWidth: "542px",
-                                minHeight: "720px",
-                            }}
+                            className="service-card group glass-panel flex flex-col p-6 sm:p-8 md:p-10 lg:p-12 cursor-pointer transition-all duration-500 hover:border-[var(--accent)] hover:shadow-[0_0_60px_rgba(204,100,55,0.3)] hover:scale-[1.02] hover:bg-white/5 w-full md:max-w-[542px] min-h-[auto] md:min-h-[720px]"
                             data-cursor-text={service.cursorLabel}
                             data-cursor-hover
                         >

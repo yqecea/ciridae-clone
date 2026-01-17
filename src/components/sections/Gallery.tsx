@@ -149,7 +149,7 @@ export function Gallery() {
     return (
         <section
             ref={sectionRef}
-            className="relative w-full py-32 overflow-hidden"
+            className="relative w-full py-24 sm:py-32 overflow-hidden"
             style={{
                 background: "#0B0B0B",
                 minHeight: "100vh",
@@ -172,10 +172,54 @@ export function Gallery() {
                 </div>
             </div>
 
-            {/* Gallery Container */}
+            {/* Gallery Container - Mobile: stacked, Desktop: absolute positioned */}
+            {/* Mobile Layout */}
+            <div className="flex flex-col gap-6 px-4 md:hidden">
+                {GALLERY_IMAGES.map((image, index) => (
+                    <div
+                        key={image.id}
+                        className="gallery-card relative w-full aspect-[4/3] rounded-lg overflow-hidden"
+                        style={{
+                            boxShadow: "0 20px 60px rgba(0, 0, 0, 0.5)",
+                        }}
+                    >
+                        <Image
+                            src={image.imageSrc}
+                            alt={image.title}
+                            fill
+                            className="object-cover"
+                            sizes="100vw"
+                        />
+                        {/* Overlay gradient */}
+                        <div
+                            className="absolute inset-0"
+                            style={{
+                                background: "linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 50%)",
+                            }}
+                        />
+                        {/* Text overlay */}
+                        <div className="absolute bottom-4 left-4 right-4 z-10">
+                            <div
+                                className="section-label mb-1"
+                                style={{ color: "rgba(255, 255, 255, 0.5)" }}
+                            >
+                                {image.subtitle}
+                            </div>
+                            <h4
+                                className="text-lg font-normal tracking-[-0.01em] uppercase text-white"
+                                style={{ fontFamily: 'var(--font-display)' }}
+                            >
+                                {image.title}
+                            </h4>
+                        </div>
+                    </div>
+                ))}
+            </div>
+
+            {/* Desktop Layout - Absolute positioned */}
             <div
                 ref={containerRef}
-                className="relative w-full max-w-6xl mx-auto px-6"
+                className="relative w-full max-w-6xl mx-auto px-6 hidden md:block"
                 style={{ height: "600px" }}
             >
                 {GALLERY_IMAGES.map((image, index) => (

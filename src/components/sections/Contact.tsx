@@ -66,10 +66,10 @@ export function Contact() {
     return (
         <section
             ref={sectionRef}
-            className="relative w-full py-32 overflow-hidden"
+            className="relative w-full py-24 sm:py-32 overflow-hidden"
             style={{
                 background: "#0A0A0A",
-                minHeight: "80vh",
+                minHeight: "70vh",
             }}
         >
             {/* Left side image - Sculpture */}
@@ -127,9 +127,9 @@ export function Contact() {
                 >
                     <h2
                         style={{
-                            fontSize: "clamp(32px, 6vw, 72px)",
+                            fontSize: "clamp(28px, 6vw, 72px)",
                         }}
-                        className="text-heading-xl font-bold tracking-[-0.02em] uppercase text-white leading-[1.1]"
+                        className="text-heading-xl font-bold tracking-[-0.02em] uppercase text-white leading-[1.1] break-words"
                     >
                         {headingText.split(" ").map((word, i) => (
                             <span key={i} className="word inline-block mr-[0.25em]">

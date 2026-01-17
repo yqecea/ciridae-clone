@@ -47,10 +47,10 @@ export function Testimonials() {
     return (
         <section
             ref={sectionRef}
-            className="relative w-full py-32"
+            className="relative w-full py-24 sm:py-32 overflow-hidden"
             style={{ background: "#0B0B0B" }}
         >
-            <div className="w-full max-w-7xl mx-auto px-6">
+            <div className="w-full max-w-7xl mx-auto px-4 sm:px-6">
                 {/* Section header */}
                 <div className="flex flex-col items-center text-center mb-16 animate-in">
                     <div className="section-label mb-4">
@@ -70,7 +70,7 @@ export function Testimonials() {
                     {TESTIMONIALS.map((testimonial) => (
                         <div
                             key={testimonial.id}
-                            className="p-8 md:p-10"
+                            className="p-6 sm:p-8 md:p-10"
                             style={{
                                 background: "rgba(20, 20, 20, 0.6)",
                                 border: "1px solid rgba(255, 255, 255, 0.08)",
