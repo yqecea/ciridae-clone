@@ -77,9 +77,9 @@ export function Security() {
             className="relative py-24 md:py-32"
             style={{ background: "#0B0B0B" }}
         >
-            <div className="max-w-4xl mx-auto px-6">
+            <div className="max-w-7xl mx-auto px-6">
                 {/* Section header */}
-                <div className="text-center mb-16 md:mb-24">
+                <div className="text-center mb-16 md:mb-24 flex flex-col items-center">
                     <div
                         className="mb-4"
                         style={{
@@ -110,7 +110,7 @@ export function Security() {
                 </div>
 
                 {/* Timeline - stacked on mobile, alternating on desktop */}
-                <div ref={itemsRef} className="relative">
+                <div ref={itemsRef} className="relative max-w-5xl mx-auto">
                     {/* Central vertical line - hidden on mobile */}
                     <div
                         className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2"
@@ -163,13 +163,13 @@ export function Security() {
                                 className="hidden md:grid"
                                 style={{
                                     gridTemplateColumns: "1fr auto 1fr",
-                                    gap: "32px",
+                                    gap: "48px",
                                     alignItems: "start",
                                 }}
                             >
                                 {/* Left content - shown on even items */}
                                 <div
-                                    className={`${index % 2 === 0 ? "text-right" : "invisible"}`}
+                                    className={`${index % 2 === 0 ? "text-right flex flex-col items-end" : "invisible"}`}
                                 >
                                     {index % 2 === 0 && (
                                         <>
@@ -192,7 +192,6 @@ export function Security() {
                                                     fontSize: "14px",
                                                     lineHeight: 1.6,
                                                     color: "rgba(255, 255, 255, 0.6)",
-                                                    marginLeft: "auto",
                                                     maxWidth: "280px",
                                                 }}
                                             >
@@ -205,20 +204,20 @@ export function Security() {
                                 {/* Center node */}
                                 <div className="relative flex flex-col items-center">
                                     <div
-                                        className="w-3 h-3 rounded-full"
-                                        style={{ background: "#CC6437" }}
+                                        className="w-3 h-3 rounded-full z-10"
+                                        style={{ background: "#CC6437", boxShadow: "0 0 10px rgba(204, 100, 55, 0.5)" }}
                                     />
                                     {index < SECURITY_ITEMS.length - 1 && (
                                         <div
-                                            className="timeline-line w-px h-24 origin-top"
-                                            style={{ background: "rgba(255, 255, 255, 0.15)" }}
+                                            className="timeline-line w-px h-32 origin-top bg-white/10"
+                                            style={{ background: "linear-gradient(to bottom, rgba(255,255,255,0.15), rgba(255,255,255,0.05))" }}
                                         />
                                     )}
                                 </div>
 
                                 {/* Right content - shown on odd items */}
                                 <div
-                                    className={`${index % 2 === 1 ? "text-left" : "invisible"}`}
+                                    className={`${index % 2 === 1 ? "text-left flex flex-col items-start" : "invisible"}`}
                                 >
                                     {index % 2 === 1 && (
                                         <>
