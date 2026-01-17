@@ -12,7 +12,7 @@ const NAV_LINKS = [
 export function Footer() {
     return (
         <footer
-            className="relative py-16 md:py-24 overflow-hidden"
+            className="relative w-full py-16 md:py-24 overflow-hidden"
             style={{
                 background: "#0B0B0B",
             }}

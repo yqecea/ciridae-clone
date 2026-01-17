@@ -80,12 +80,12 @@ export function Team() {
     return (
         <section
             ref={sectionRef}
-            className="relative py-32 overflow-hidden"
+            className="relative w-full py-32 overflow-hidden"
             style={{ background: "#0B0B0B" }}
         >
-            <div className="max-w-7xl mx-auto px-6">
+            <div className="w-full max-w-7xl mx-auto px-6">
                 {/* Section header */}
-                <div className="text-center mb-16 animate-in">
+                <div className="flex flex-col items-center text-center mb-16 animate-in">
                     <div
                         className="mb-4"
                         style={{
@@ -114,7 +114,7 @@ export function Team() {
                         World&apos;s Leading Organizations
                     </h2>
                     <p
-                        className="mt-6 max-w-md mx-auto"
+                        className="mt-6 max-w-md text-center"
                         style={{
                             fontFamily: '"Pragmatica Cond", Arial, sans-serif',
                             fontSize: "16px",
@@ -128,8 +128,8 @@ export function Team() {
                 </div>
 
                 {/* Company logos marquee */}
-                <div className="relative overflow-hidden mb-24 animate-in">
-                    <div ref={logosRef} className="flex items-center">
+                <div className="relative w-full overflow-hidden mb-24 animate-in">
+                    <div ref={logosRef} className="flex items-center justify-center gap-16 px-4">
                         {/* Double the logos for infinite scroll */}
                         {[...COMPANY_LOGOS, ...COMPANY_LOGOS].map((logo, i) => (
                             <LogoPlaceholder key={i} name={logo.name} width={logo.width} />

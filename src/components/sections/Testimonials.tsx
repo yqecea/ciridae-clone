@@ -69,12 +69,12 @@ export function Testimonials() {
     return (
         <section
             ref={sectionRef}
-            className="relative py-32"
+            className="relative w-full py-32"
             style={{ background: "#0B0B0B" }}
         >
-            <div className="max-w-7xl mx-auto px-6">
+            <div className="w-full max-w-7xl mx-auto px-6">
                 {/* Section header */}
-                <div className="text-center mb-16 animate-in">
+                <div className="flex flex-col items-center text-center mb-16 animate-in">
                     <div
                         className="mb-4"
                         style={{
@@ -101,25 +101,21 @@ export function Testimonials() {
                     </h2>
                 </div>
 
-                {/* Testimonials slider */}
-                <div className="relative animate-in">
-                    <div className="flex gap-6 overflow-hidden">
-                        {TESTIMONIALS.map((testimonial, index) => (
+                {/* Testimonials grid/slider */}
+                <div className="relative w-full animate-in">
+                    {/* Desktop: Grid Layout (Perfectly Centered) */}
+                    <div className="hidden md:grid grid-cols-3 gap-6">
+                        {TESTIMONIALS.map((testimonial) => (
                             <div
                                 key={testimonial.id}
-                                className="flex-shrink-0 w-full md:w-1/2 transition-all duration-500"
-                                style={{
-                                    transform: `translateX(-${currentIndex * 100}%)`,
-                                    opacity: Math.abs(index - currentIndex) < 2 ? 1 : 0.3,
-                                }}
+                                className="h-full"
                             >
                                 <div
-                                    className="p-8 h-full"
+                                    className="p-8 h-full flex flex-col"
                                     style={{
                                         background: "rgba(30, 30, 30, 0.5)",
                                         border: "1px solid rgba(255, 255, 255, 0.1)",
                                         borderRadius: "10px",
-                                        minHeight: "300px",
                                     }}
                                 >
                                     {/* Quote mark */}
@@ -186,51 +182,136 @@ export function Testimonials() {
                         ))}
                     </div>
 
-                    {/* Navigation */}
-                    <div className="flex items-center justify-between mt-8">
-                        <div
-                            style={{
-                                fontFamily: '"Roboto Mono", monospace',
-                                fontSize: "14px",
-                                color: "rgba(255, 255, 255, 0.6)",
-                            }}
-                        >
-                            {currentIndex + 1} / {TESTIMONIALS.length}
+                    {/* Mobile: Slider (kept for responsiveness) */}
+                    <div className="md:hidden relative">
+                        <div className="flex gap-6 overflow-hidden">
+                            {TESTIMONIALS.map((testimonial, index) => (
+                                <div
+                                    key={testimonial.id}
+                                    className="flex-shrink-0 w-full transition-all duration-500"
+                                    style={{
+                                        transform: `translateX(-${currentIndex * 100}%)`,
+                                    }}
+                                >
+                                    <div
+                                        className="p-8 h-full"
+                                        style={{
+                                            background: "rgba(30, 30, 30, 0.5)",
+                                            border: "1px solid rgba(255, 255, 255, 0.1)",
+                                            borderRadius: "10px",
+                                            minHeight: "300px",
+                                        }}
+                                    >
+                                        {/* Quote mark */}
+                                        <div
+                                            className="text-4xl mb-6"
+                                            style={{ color: "rgba(255, 255, 255, 0.3)" }}
+                                        >
+                                            &ldquo;
+                                        </div>
+
+                                        {/* Quote */}
+                                        <p
+                                            className="mb-8"
+                                            style={{
+                                                fontFamily: '"Pragmatica Cond", Arial, sans-serif',
+                                                fontSize: "18px",
+                                                lineHeight: 1.5,
+                                                color: "#FFFFFF",
+                                            }}
+                                        >
+                                            {testimonial.quote}
+                                        </p>
+
+                                        {/* Author info */}
+                                        <div className="mt-auto">
+                                            {testimonial.author && (
+                                                <div
+                                                    style={{
+                                                        fontFamily: '"Roboto Mono", monospace',
+                                                        fontSize: "12px",
+                                                        color: "#CC6437",
+                                                        textTransform: "uppercase",
+                                                    }}
+                                                >
+                                                    {testimonial.author}
+                                                </div>
+                                            )}
+                                            {testimonial.role && (
+                                                <div
+                                                    className="mt-1"
+                                                    style={{
+                                                        fontFamily: '"Roboto Mono", monospace',
+                                                        fontSize: "11px",
+                                                        color: "rgba(255, 255, 255, 0.6)",
+                                                        textTransform: "uppercase",
+                                                    }}
+                                                >
+                                                    {testimonial.role}
+                                                </div>
+                                            )}
+                                            <div
+                                                className="mt-4"
+                                                style={{
+                                                    fontFamily: '"Pragmatica Cond", Arial, sans-serif',
+                                                    fontSize: "16px",
+                                                    color: "rgba(255, 255, 255, 0.8)",
+                                                }}
+                                            >
+                                                {testimonial.company}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
 
-                        <div className="flex gap-4">
-                            <button
-                                onClick={prevSlide}
-                                className="w-10 h-10 flex items-center justify-center rounded-full border border-white/30 hover:border-white/60 transition-colors"
-                                aria-label="Previous testimonial"
+                        {/* Mobile Navigation */}
+                        <div className="flex items-center justify-between mt-8">
+                            <div
+                                style={{
+                                    fontFamily: '"Roboto Mono", monospace',
+                                    fontSize: "14px",
+                                    color: "rgba(255, 255, 255, 0.6)",
+                                }}
                             >
-                                <svg
-                                    width="16"
-                                    height="16"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeWidth="2"
+                                {currentIndex + 1} / {TESTIMONIALS.length}
+                            </div>
+
+                            <div className="flex gap-4">
+                                <button
+                                    onClick={prevSlide}
+                                    className="w-10 h-10 flex items-center justify-center rounded-full border border-white/30 hover:border-white/60 transition-colors"
+                                    aria-label="Previous testimonial"
                                 >
-                                    <path d="M15 18l-6-6 6-6" />
-                                </svg>
-                            </button>
-                            <button
-                                onClick={nextSlide}
-                                className="w-10 h-10 flex items-center justify-center rounded-full border border-white/30 hover:border-white/60 transition-colors"
-                                aria-label="Next testimonial"
-                            >
-                                <svg
-                                    width="16"
-                                    height="16"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    strokeWidth="2"
+                                    <svg
+                                        width="16"
+                                        height="16"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeWidth="2"
+                                    >
+                                        <path d="M15 18l-6-6 6-6" />
+                                    </svg>
+                                </button>
+                                <button
+                                    onClick={nextSlide}
+                                    className="w-10 h-10 flex items-center justify-center rounded-full border border-white/30 hover:border-white/60 transition-colors"
+                                    aria-label="Next testimonial"
                                 >
-                                    <path d="M9 18l6-6-6-6" />
-                                </svg>
-                            </button>
+                                    <svg
+                                        width="16"
+                                        height="16"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeWidth="2"
+                                    >
+                                        <path d="M9 18l6-6-6-6" />
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -57,10 +57,10 @@ export function Careers() {
     return (
         <section
             ref={sectionRef}
-            className="relative py-24 md:py-32 overflow-hidden"
+            className="relative w-full py-24 md:py-32 overflow-hidden"
             style={{ background: "#0B0B0B" }}
         >
-            <div className="max-w-7xl mx-auto px-6">
+            <div className="w-full max-w-7xl mx-auto px-6">
                 {/* Section label */}
                 <div
                     className="text-center mb-6"
